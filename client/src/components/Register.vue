@@ -5,28 +5,30 @@
         <at-card>
           <h4 slot="title">Registration</h4>
           <div>
-            <at-input type="email" name="email" v-model="email" placeholder="Email Address" size="small">
-              <template slot="prepend">
-                <i class="icon icon-mail"></i>
-                &nbsp;
-                <span>Email</span>
-              </template>
-            </at-input>
-            <at-input type="password" name="password" v-model="password" placeholder="Password" size="small">
-              <template slot="prepend">
-                <i class="icon icon-lock"></i>
-                &nbsp;
-                <span>Password</span>
-              </template>
-            </at-input>
+            <form name="studentern-login-form" autocomplete="off">
+              <at-input type="email" name="email" v-model="email" placeholder="Email Address" size="small">
+                <template slot="prepend">
+                  <i class="icon icon-mail"></i>
+                  &nbsp;
+                  <span>Email</span>
+                </template>
+              </at-input>
+              <at-input type="password" name="password" v-model="password" autocomplete="new-password" placeholder="Password" size="small">
+                <template slot="prepend">
+                  <i class="icon icon-lock"></i>
+                  &nbsp;
+                  <span>Password</span>
+                </template>
+              </at-input>
+            </form>
             <br/>
             <at-button @click="register" hollow><i class="icon icon-log-in"></i>&nbsp;Register</at-button>
           </div>
         </at-card>
+        <div class="error" v-html="error" />
       </div>
     </div>
     <br/>
-    <div class="error" v-html="error" />
     <br/>
     <!-- <button @click="register">Register</button> -->
   </div>
@@ -45,10 +47,12 @@ export default {
   methods: {
     async register () {
       try {
-        await AuthenticationService.register({
+        const response = await AuthenticationService.register({
           email: this.email,
           password: this.password
         })
+        this.$store.dipsatch('setToken', response.data.token)
+        this.$store.dispatch('setToken', response.data.user)
       } catch (error) {
         this.error = error.response.data.error
       }

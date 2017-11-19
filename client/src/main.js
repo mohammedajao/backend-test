@@ -4,15 +4,21 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import AtComponents from 'at-ui'
+import { sync } from 'vuex-router-sync'
 import 'at-ui-style'
+import store from '@/store/store'
 
 Vue.config.productionTip = false
+
 Vue.use(AtComponents)
+
+sync(store, router)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   template: '<App/>',
   components: { App }
 })
