@@ -28,7 +28,6 @@
     <br/>
     <div class="error" v-html="error" />
     <br/>
-    <!-- <button @click="login">Register</button> -->
   </div>
 </template>
 

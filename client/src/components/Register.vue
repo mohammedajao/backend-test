@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="registration-container">
     <div class="row at-row no-gutter flex-center">
       <div class="col-md-4">
         <at-card>
@@ -22,7 +22,7 @@
               </at-input>
             </form>
             <br/>
-            <at-button @click="register" hollow><i class="icon icon-log-in"></i>&nbsp;Register</at-button>
+            <at-button @click="register" hollow><i class="icon icon-user-plus"></i>&nbsp;Register</at-button>
           </div>
         </at-card>
         <div class="error" v-html="error" />
@@ -30,7 +30,6 @@
     </div>
     <br/>
     <br/>
-    <!-- <button @click="register">Register</button> -->
   </div>
 </template>
 
@@ -64,5 +63,9 @@ export default {
 <style scoped>
 .error {
   color: red
+}
+
+.registration-container {
+  margin-top: 1rem;
 }
 </style>
